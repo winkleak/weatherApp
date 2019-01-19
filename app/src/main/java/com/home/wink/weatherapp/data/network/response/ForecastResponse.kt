@@ -1,8 +1,14 @@
 package com.home.wink.weatherapp.data.network.response
 
 import com.google.gson.annotations.SerializedName
+import com.home.wink.weatherapp.data.network.imageIdFromWeather
+import com.home.wink.weatherapp.data.network.timeInMillisFromSeconds
 import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.domain.entity.directionByDegree
+
+fun kelvinToCelsius(kelvin: Double): Double{
+    return kelvin -273.15
+}
 
 data class ForecastResponse(
         @SerializedName("city")
@@ -44,7 +50,7 @@ data class ForecastResponse(
             @SerializedName("main")
             val main: Main,
             @SerializedName("snow")
-            val snow: Snow,
+            val snow: Snow?,
             @SerializedName("sys")
             val sys: Sys,
             @SerializedName("weather")
@@ -59,17 +65,17 @@ data class ForecastResponse(
 
         data class Main(
                 @SerializedName("grnd_level")
-                val grndLevel: Int,
+                val grndLevel: Double,
                 @SerializedName("humidity")
                 val humidity: Int,
                 @SerializedName("pressure")
-                val pressure: Int,
+                val pressure: Double,
                 @SerializedName("sea_level")
                 val seaLevel: Double,
                 @SerializedName("temp")
                 val temp: Double,
                 @SerializedName("temp_kf")
-                val tempKf: Int,
+                val tempKf: Double,
                 @SerializedName("temp_max")
                 val tempMax: Double,
                 @SerializedName("temp_min")
@@ -103,20 +109,25 @@ data class ForecastResponse(
         )
     }
 
-    fun toForecasts(): List<Forecast>{
+    fun toForecasts(): List<Forecast> {
         val forecasts: MutableList<Forecast> = mutableListOf()
-        list.forEach{responseForecast ->
+        list.forEach { responseForecast ->
             forecasts.add(
-        Forecast(
-            date = responseForecast.dt,
-            temperature = responseForecast.main.temp,
-            humidity = responseForecast.main.humidity,
-            pressure = responseForecast.main.pressure,
-            clouds = responseForecast.clouds.all,
-            weather = responseForecast.weather.first().description,
-            windSpeed = responseForecast.wind.speed,
-            windDirection = directionByDegree(responseForecast.wind.deg)
-        ))
-    }
+                    Forecast(
+                            city = city.name,
+                            date = timeInMillisFromSeconds(responseForecast.dt),
+                            temperature = kelvinToCelsius(responseForecast.main.temp),
+                            humidity = responseForecast.main.humidity,
+                            pressure = responseForecast.main.pressure,
+                            clouds = responseForecast.clouds.all,
+                            snow = if(responseForecast.snow == null) null else "",
+                            weather = responseForecast.weather.first().description,
+                            windSpeed = responseForecast.wind.speed,
+                            windDirection = directionByDegree(responseForecast.wind.deg),
+                            iconId = imageIdFromWeather(responseForecast.weather.first().icon)
+                    ))
+        }
         return forecasts
-}}
+    }
+
+}

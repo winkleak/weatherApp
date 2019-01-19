@@ -47,6 +47,11 @@ class AppActivity : AppCompatActivity() {
         navigatorHolder.setNavigator(navigator)
     }
 
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
+    }
+
 
     override fun onBackPressed() {
         currentFragment?.onBackPressed() ?: super.onBackPressed()

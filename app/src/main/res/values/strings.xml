@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="munich">Munich</string>
+    <string name="moscow">Moscow</string>
+    <string name="humidity">humidity</string>
+    <string name="pressure">pressure</string>
+    <string name="wind">wind</string>
 </resources>
