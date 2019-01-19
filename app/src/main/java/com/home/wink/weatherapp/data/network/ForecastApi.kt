@@ -6,7 +6,7 @@ import com.home.wink.weatherapp.data.network.response.WeatherResponse
 import io.reactivex.Single
 import retrofit2.http.*
 
-const val BASE_URL = "api.openweathermap.org/data/2.5/"
+const val BASE_URL = "api.openweathermap.org/data/2.5/?appid=efd66279846b8371ea4c73309c8c150f"
 private const val WEATHER = "weather"
 private const val FORECAST = "forecast"
 

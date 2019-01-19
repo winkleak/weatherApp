@@ -1,11 +1,13 @@
 package com.home.wink.weatherapp.presentation.forecastList
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.presentation.main.BaseFragment
 import com.home.wink.weatherapp.R
+import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.presentation.MainViewModelFactory
 import javax.inject.Inject
 
@@ -20,11 +22,16 @@ class ForecastListFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ForecastListViewModel::class.java)
+        viewModel.loadForecastForCity(524901)
        // viewModel.loadCategories()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel.forecastLoadedLiveData.observe(this, Observer<List<Forecast>> {
+            Log.d("forecastsLoaded", it.toString())
+
+        })
     /*    viewModel.categoriesLiveData.observe(this, Observer<CategoriesFetchResult> {
             processResult(it)
 

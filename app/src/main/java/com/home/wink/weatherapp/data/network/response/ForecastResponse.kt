@@ -1,6 +1,8 @@
 package com.home.wink.weatherapp.data.network.response
 
 import com.google.gson.annotations.SerializedName
+import com.home.wink.weatherapp.domain.entity.Forecast
+import com.home.wink.weatherapp.domain.entity.directionByDegree
 
 data class ForecastResponse(
         @SerializedName("city")
@@ -100,4 +102,21 @@ data class ForecastResponse(
         class Snow(
         )
     }
-}
+
+    fun toForecasts(): List<Forecast>{
+        val forecasts: MutableList<Forecast> = mutableListOf()
+        list.forEach{responseForecast ->
+            forecasts.add(
+        Forecast(
+            date = responseForecast.dt,
+            temperature = responseForecast.main.temp,
+            humidity = responseForecast.main.humidity,
+            pressure = responseForecast.main.pressure,
+            clouds = responseForecast.clouds.all,
+            weather = responseForecast.weather.first().description,
+            windSpeed = responseForecast.wind.speed,
+            windDirection = directionByDegree(responseForecast.wind.deg)
+        ))
+    }
+        return forecasts
+}}
