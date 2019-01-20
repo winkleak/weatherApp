@@ -2,13 +2,10 @@ package com.home.wink.weatherapp.data.network.response
 
 import com.google.gson.annotations.SerializedName
 import com.home.wink.weatherapp.data.network.imageIdFromWeather
+import com.home.wink.weatherapp.data.network.kelvinToCelsius
 import com.home.wink.weatherapp.data.network.timeInMillisFromSeconds
 import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.domain.entity.directionByDegree
-
-fun kelvinToCelsius(kelvin: Double): Double{
-    return kelvin -273.15
-}
 
 data class ForecastResponse(
         @SerializedName("city")
@@ -123,7 +120,7 @@ data class ForecastResponse(
                             snow = if(responseForecast.snow == null) null else "",
                             weather = responseForecast.weather.first().description,
                             windSpeed = responseForecast.wind.speed,
-                            windDirection = directionByDegree(responseForecast.wind.deg),
+                            windDirection = responseForecast.wind.deg,
                             iconId = imageIdFromWeather(responseForecast.weather.first().icon)
                     ))
         }

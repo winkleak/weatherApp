@@ -10,6 +10,6 @@ data class Forecast(
         val snow: String?,
         val weather: String,
         val windSpeed: Double,
-        val windDirection: WindDirection,
+        val windDirection: Double,
         val iconId: Int
 )

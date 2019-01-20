@@ -1,7 +1,7 @@
 package com.home.wink.weatherapp.presentation.forecastList
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,10 +10,15 @@ import com.home.wink.weatherapp.presentation.main.BaseFragment
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.presentation.MainViewModelFactory
+import com.home.wink.weatherapp.presentation.forecastDetail.ForecastDetailFragment
+
 import kotlinx.android.synthetic.main.fragment_forecast_list.*
 import javax.inject.Inject
 
-class ForecastListFragment : BaseFragment() {
+class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClickListener {
+
+    override fun onForecastClick(forecast: Forecast) {
+    }
 
     companion object {
         private const val CITY_ID_EXTRA = "city_id_extra"
@@ -23,14 +28,13 @@ class ForecastListFragment : BaseFragment() {
     }
 
     override val layoutRes: Int = R.layout.fragment_forecast_list
-    private val adapter = ForecastListAdapter()
-
+    private val adapter = ForecastListAdapter(this)
     private lateinit var viewModel: ForecastListViewModel
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         App.appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ForecastListViewModel::class.java)
     }
@@ -41,11 +45,16 @@ class ForecastListFragment : BaseFragment() {
         recyclerView.adapter = adapter
         viewModel.forecastLoadedLiveData.observe(this, Observer<List<Forecast>> {
             adapter.submitList(it)
+            swiperefresh.isRefreshing = false
         })
+        swiperefresh.setOnRefreshListener {
+            arguments?.let { loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        arguments?.let { viewModel.loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
+    private fun loadForecastForCity(cityId: Int) {
+        viewModel.loadForecastForCity(cityId)
+        swiperefresh.isRefreshing = true
     }
+
 }

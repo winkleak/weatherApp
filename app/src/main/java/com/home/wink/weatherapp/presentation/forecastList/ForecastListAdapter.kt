@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.domain.entity.Forecast
+import com.home.wink.weatherapp.domain.entity.directionByDegree
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ForecastListAdapter: ListAdapter<Forecast, ForecastListAdapter.ViewHolder>(diffCallback) {
+class ForecastListAdapter(private val listener: OnForecastClickListener): ListAdapter<Forecast, ForecastListAdapter.ViewHolder>(diffCallback) {
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Forecast>() {
@@ -33,25 +34,31 @@ class ForecastListAdapter: ListAdapter<Forecast, ForecastListAdapter.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastListAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_forecast, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: ForecastListAdapter.ViewHolder, position: Int) {
         holder.bindData(getItem(position))
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View, private val listener: OnForecastClickListener): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+        override fun onClick(v: View?) {
+            listener.onForecastClick(getItem(adapterPosition))
+        }
         fun bindData(item: Forecast) {
             itemView.apply {
                 temperatureTv.text = "${temperatureFormat.format(item.temperature.dec())}°"
                 humidityTv.text = item.humidity.toString()
                 pressureTv.text = item.pressure.toString()
-                windTv.text = "${item.windDirection} ${item.windSpeed} m/s"
+                windTv.text = "${directionByDegree(item.windDirection)} ${item.windSpeed} m/s"
                 dateTv.text = titleDateFormat.format(Date(item.date))
                 weatherIcon.setImageResource(item.iconId)
                 weatherDescTv.text = item.weather
             }
         }
 
+    }
+    interface OnForecastClickListener{
+        fun onForecastClick(forecast: Forecast)
     }
 }

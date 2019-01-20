@@ -27,3 +27,7 @@ fun imageIdFromWeather(weatherId: String): Int{
 }
 
 fun timeInMillisFromSeconds(seconds: Int) = seconds * 1000L
+
+fun kelvinToCelsius(kelvin: Double): Double{
+    return kelvin -273.15
+}

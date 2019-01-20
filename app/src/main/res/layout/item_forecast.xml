@@ -77,10 +77,10 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:background="@drawable/forecast_params_circle_bg"
-            app:layout_constraintBottom_toBottomOf="@id/windSpeedTitle"
+            app:layout_constraintBottom_toBottomOf="@id/windTitle"
             app:layout_constraintEnd_toEndOf="@id/temperatureTv"
             app:layout_constraintStart_toStartOf="@id/temperatureTv"
-            app:layout_constraintTop_toTopOf="@id/windSpeedTitle" />
+            app:layout_constraintTop_toTopOf="@id/windTitle" />
 
         <TextView
             android:id="@+id/humidityTitle"
@@ -127,7 +127,7 @@
             tools:text="775" />
 
         <TextView
-            android:id="@+id/windSpeedTitle"
+            android:id="@+id/windTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -146,9 +146,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textColor="@color/textColor"
-            app:layout_constraintBottom_toBottomOf="@id/windSpeedTitle"
+            app:layout_constraintBottom_toBottomOf="@id/windTitle"
             app:layout_constraintEnd_toStartOf="@id/weatherIcon"
-            app:layout_constraintTop_toTopOf="@id/windSpeedTitle"
+            app:layout_constraintTop_toTopOf="@id/windTitle"
             tools:text="nord 12 m/s" />
 
         <androidx.appcompat.widget.AppCompatImageView

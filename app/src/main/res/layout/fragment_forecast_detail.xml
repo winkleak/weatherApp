@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/textColor"
+        android:layout_marginStart="16dp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12 февраля 15:00" />
+
+    <TextView
+        android:id="@+id/cityTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dateTv"
+        app:layout_constraintBottom_toBottomOf="@id/dateTv"
+        tools:text="Moscow"/>
+
+    <TextView
+        android:id="@+id/temperatureTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/temperature_circle_bg"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="42°" />
+
+    <TextView
+        android:id="@+id/weatherDescTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cityTv"
+        tools:text="Clear sky" />
+
+    <View
+        android:id="@+id/humidityPoint"
+        android:layout_width="@dimen/pointer_diameter"
+        android:layout_height="@dimen/pointer_diameter"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/forecast_params_circle_bg"
+        app:layout_constraintBottom_toBottomOf="@id/humidityTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/humidityTitle" />
+
+    <View
+        android:id="@+id/pressurePoint"
+        android:layout_width="@dimen/pointer_diameter"
+        android:layout_height="@dimen/pointer_diameter"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/forecast_params_circle_bg"
+        app:layout_constraintBottom_toBottomOf="@id/pressureTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pressureTitle" />
+
+    <View
+        android:id="@+id/windSpeedPoint"
+        android:layout_width="@dimen/pointer_diameter"
+        android:layout_height="@dimen/pointer_diameter"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/forecast_params_circle_bg"
+        app:layout_constraintBottom_toBottomOf="@id/windSpeedTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/windSpeedTitle" />
+
+    <View
+        android:id="@+id/windDirectionPoint"
+        android:layout_width="@dimen/pointer_diameter"
+        android:layout_height="@dimen/pointer_diameter"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/forecast_params_circle_bg"
+        app:layout_constraintBottom_toBottomOf="@id/windDirectionTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/windDirectionTitle" />
+
+    <View
+        android:id="@+id/cloudyPoint"
+        android:layout_width="@dimen/pointer_diameter"
+        android:layout_height="@dimen/pointer_diameter"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/forecast_params_circle_bg"
+        app:layout_constraintBottom_toBottomOf="@id/cloudyTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cloudyTitle" />
+
+    <TextView
+        android:id="@+id/humidityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/humidity"
+        android:textColor="@color/textColor"
+        app:layout_constraintStart_toEndOf="@id/humidityPoint"
+        app:layout_constraintTop_toBottomOf="@id/weatherDescTv" />
+
+    <TextView
+        android:id="@+id/humidityTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@id/humidityTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/humidityTitle"
+        tools:text="56%" />
+
+    <TextView
+        android:id="@+id/pressureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pressure"
+        android:textColor="@color/textColor"
+        app:layout_constraintStart_toEndOf="@id/pressurePoint"
+        app:layout_constraintTop_toBottomOf="@id/humidityTitle" />
+
+    <TextView
+        android:id="@+id/pressureTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@id/pressureTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pressureTitle"
+        tools:text="775" />
+
+    <TextView
+        android:id="@+id/windSpeedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/wind_speed"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/windSpeedPoint"
+        app:layout_constraintTop_toBottomOf="@id/pressureTitle"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/windSpeedTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@id/windSpeedTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/windSpeedTitle"
+        tools:text="12 m/s" />
+
+    <TextView
+        android:id="@+id/windDirectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/wind_direction"
+        android:textColor="@color/textColor"
+        app:layout_constraintStart_toEndOf="@id/pressurePoint"
+        app:layout_constraintTop_toBottomOf="@id/windSpeedTitle" />
+
+    <TextView
+        android:id="@+id/windDirectionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@id/windDirectionTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/windDirectionTitle"
+        tools:text="nord" />
+
+    <TextView
+        android:id="@+id/cloudyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/cloudy"
+        android:textColor="@color/textColor"
+        app:layout_constraintStart_toEndOf="@id/cloudyPoint"
+        app:layout_constraintTop_toBottomOf="@id/windDirectionTitle" />
+
+    <TextView
+        android:id="@+id/cloudyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="@id/cloudyTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cloudyTitle"
+        tools:text="70%" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cloudyTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

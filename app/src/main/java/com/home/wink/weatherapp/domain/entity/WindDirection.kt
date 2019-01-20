@@ -14,13 +14,5 @@ enum class WindDirection(val value: String) {
             SOUTH
         } else if(degree in 225.0..315.0) WEST else UNDEFINED
         }
-/*    fun directionByValue(value: String): WindDirection{
-        return when(value){
-            NORD.value -> NORD
-            EAST.value -> EAST
-            SOUTH.value -> SOUTH
-            WEST.value -> WEST
-            else -> UNDEFINED
-        }
-    }*/
+
 

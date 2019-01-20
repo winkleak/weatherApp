@@ -1,18 +1,12 @@
 package com.home.wink.weatherapp.presentation.main
 
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.home.wink.weatherapp.presentation.forecastList.ForecastListFragment
 
-const val MUNICH = 3220838
-const val MOSCOW = 524901
 
-class MainViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+class MainViewPagerAdapter(manager: FragmentManager, private val fragments: List<ForecastListFragment>) : FragmentStatePagerAdapter(manager) {
 
-    private val fragments = listOf(
-            ForecastListFragment.newInstance(MUNICH),
-            ForecastListFragment.newInstance(MOSCOW)
-    )
     override fun getItem(position: Int): BaseFragment {
         return fragments[position]
     }

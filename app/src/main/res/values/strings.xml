@@ -2,7 +2,10 @@
     <string name="app_name">WeatherApp</string>
     <string name="munich">Munich</string>
     <string name="moscow">Moscow</string>
-    <string name="humidity">humidity</string>
-    <string name="pressure">pressure</string>
-    <string name="wind">wind</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="wind_direction">Wind direction</string>
+    <string name="cloudy">Cloudy</string>
 </resources>
