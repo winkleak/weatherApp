@@ -1,6 +1,7 @@
 package com.home.wink.weatherapp.presentation.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
@@ -13,7 +14,7 @@ import com.home.wink.weatherapp.presentation.forecastList.ForecastListFragment
 import kotlinx.android.synthetic.main.element_toolbar.*
 import kotlinx.android.synthetic.main.fragment_main_layout.*
 
-const val MUNICH = 3220838
+const val MUNCHEN = 3220838
 const val MOSCOW = 524901
 
 class MainFragment : FragmentWithToolbar() {
@@ -23,7 +24,7 @@ class MainFragment : FragmentWithToolbar() {
     private lateinit var pagerAdapter: MainViewPagerAdapter
 
     private val fragments = listOf(
-            ForecastListFragment.newInstance(MUNICH),
+            ForecastListFragment.newInstance(MUNCHEN),
             ForecastListFragment.newInstance(MOSCOW)
     )
 
@@ -33,19 +34,15 @@ class MainFragment : FragmentWithToolbar() {
     }
 
     private val onTabSelectedListener = AHBottomNavigation.OnTabSelectedListener{position, _ ->
-        toolbar.title = if(position == 0) getString(R.string.munich) else getString(R.string.moscow)
+        toolbar.title = if(position == 0) getString(R.string.munchen) else getString(R.string.moscow)
         viewPager.currentItem = position
         return@OnTabSelectedListener true
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         pagerAdapter = MainViewPagerAdapter(childFragmentManager, fragments)
         viewPager.adapter = pagerAdapter
-        navigation.addItem(AHBottomNavigationItem(getString(R.string.munich), R.drawable.ic_home_black_24dp))
-        navigation.addItem(AHBottomNavigationItem(getString(R.string.moscow), R.drawable.ic_home_black_24dp))
-        navigation.setOnTabSelectedListener(onTabSelectedListener)
-        navigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
@@ -53,6 +50,14 @@ class MainFragment : FragmentWithToolbar() {
                 navigation.currentItem = position
             }
         })
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        navigation.addItem(AHBottomNavigationItem(getString(R.string.munchen), R.drawable.ic_home_black_24dp))
+        navigation.addItem(AHBottomNavigationItem(getString(R.string.moscow), R.drawable.ic_home_black_24dp))
+        navigation.setOnTabSelectedListener(onTabSelectedListener)
+        navigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
     }
 
     override fun onBeforeAttachToolbar(toolbar: Toolbar?) {

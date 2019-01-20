@@ -7,10 +7,10 @@ import javax.inject.Singleton
 
 
 @Module
-    class InteractorModule {
+    class UseCaseModule {
 
         @Singleton
         @Provides
-        fun provideGetForecastInteractor(forecastRepository: ForecastRepository): GetAllForecastUseCase = GetAllForecastUseCase(forecastRepository)
+        fun provideGetForecastUseCase(forecastRepository: ForecastRepository): GetAllForecastUseCase = GetAllForecastUseCase(forecastRepository)
 
     }

@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/firstCity"
-        android:title="@string/munich" />
+        android:title="@string/munchen" />
 
     <item
         android:id="@+id/secondCity"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.home.wink.weatherapp.domain.entity.ResponseError
 
 abstract class BaseFragment: Fragment() {
 
@@ -15,4 +16,8 @@ abstract class BaseFragment: Fragment() {
 
     open fun onBackPressed() = false
 
+
+    fun showError(error: ResponseError) {
+        //TODO show toast or snackbar
+    }
 }

@@ -8,7 +8,7 @@ import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.navigation.Screens
 import com.home.wink.weatherapp.presentation.base.BaseActivity
-import com.home.wink.weatherapp.presentation.base.FragmentWithToolbar
+import com.home.wink.weatherapp.presentation.base.BaseFragment
 import com.home.wink.weatherapp.presentation.viewModel.MainViewModelFactory
 import com.home.wink.weatherapp.presentation.viewModel.ToolbarBackButtonViewModel
 import com.home.wink.weatherapp.utils.nonNullObserve
@@ -31,8 +31,8 @@ class AppActivity : BaseActivity() {
         ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java)
     }
 
-    private val currentFragmentWithToolbar: FragmentWithToolbar?
-        get() = supportFragmentManager.findFragmentById(R.id.container) as? FragmentWithToolbar
+    private val currentFragmentWithToolbar: BaseFragment?
+        get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
 
     private val navigator: Navigator =
             object : SupportAppNavigator(this, supportFragmentManager, R.id.container) {
@@ -42,8 +42,7 @@ class AppActivity : BaseActivity() {
                         nextFragment: Fragment?,
                         fragmentTransaction: FragmentTransaction
                 ) {
-                    //fix incorrect order lifecycle callback of MainFragment
-                    fragmentTransaction.setReorderingAllowed(true)
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 }
             }
 

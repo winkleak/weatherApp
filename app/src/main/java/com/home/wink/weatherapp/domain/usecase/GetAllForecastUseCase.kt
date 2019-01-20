@@ -2,16 +2,13 @@ package com.home.wink.weatherapp.domain.usecase
 
 import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.domain.repository.ForecastRepository
-import com.home.wink.weatherapp.domain.usecase.base.UseCase
+import io.reactivex.Maybe
+import io.reactivex.Observable
 
-class GetAllForecastUseCase(val repository: ForecastRepository): UseCase<Int, List<Forecast>> {
-    override fun execute(cityId: Int, callback: UseCase.Callback<List<Forecast>>) {
-       repository.getForecastsForCity(cityId).subscribe({ forecasts ->
-           callback.onSuccess(forecasts)
-       },
-           {
-               callback.onError(it)
-           })
+class GetAllForecastUseCase(private val repository: ForecastRepository) {
+
+    fun getForecastForCity(cityId: Int): Maybe<List<Forecast>> {
+     return repository.getForecastsForCity(cityId)
     }
 
 }

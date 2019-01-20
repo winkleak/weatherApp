@@ -2,6 +2,7 @@ package com.home.wink.weatherapp.domain.entity
 
 data class Forecast(
         val city: String,
+        val cityId: Int,
         val date: Long,
         val temperature: Double,
         val humidity: Int,

@@ -1,25 +1,17 @@
 package com.home.wink.weatherapp.data.storage
 
 import androidx.room.*
-import java.util.*
+import io.reactivex.Maybe
 
 @Dao
 interface ForecastsDao {
 
-    @Query("SELECT * FROM forecasts")
-    suspend fun getAllTranslations(): List<Forecast>
-
-    @Query("SELECT * FROM forecasts WHERE dateAdded BETWEEN :dateFrom and :dateTo")
-    suspend fun getByDate(dateFrom: Date, dateTo: Date): List<Forecast>
+    @Query("SELECT * FROM forecasts WHERE cityId = :cityId")
+    fun getForecastsByCity(cityId: Int): Maybe<List<ForecastModelDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(translations: List<Forecast>)
-}
+    fun insertAll(forecasts: List<ForecastModelDb>)
 
-class DateConverter {
-    @TypeConverter
-    fun fromTimestamp(value: Long) = Date(value)
-
-    @TypeConverter
-    fun dateToTimestamp(date: Date) = date.time
+    @Query( "DELETE FROM forecasts WHERE cityId = :cityId")
+    fun deleteAllWithCityId(cityId: Int)
 }

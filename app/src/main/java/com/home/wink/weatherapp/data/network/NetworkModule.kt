@@ -2,6 +2,7 @@ package com.home.wink.weatherapp.data.network
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.home.wink.weatherapp.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -33,7 +34,7 @@ class NetworkModule {
     @Singleton
     fun provideForecastApi(gson: Gson, okHttpClient: OkHttpClient): ForecastApi {
         val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
