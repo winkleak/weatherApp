@@ -1,6 +1,7 @@
 package com.home.wink.weatherapp.presentation.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
@@ -8,9 +9,8 @@ import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.navigation.Screens
 import com.home.wink.weatherapp.presentation.base.BaseActivity
-import com.home.wink.weatherapp.presentation.base.BaseFragment
-import com.home.wink.weatherapp.presentation.viewModel.MainViewModelFactory
-import com.home.wink.weatherapp.presentation.viewModel.ToolbarBackButtonViewModel
+import com.home.wink.weatherapp.presentation.aac.MainViewModelFactory
+import com.home.wink.weatherapp.presentation.aac.ToolbarBackButtonViewModel
 import com.home.wink.weatherapp.utils.nonNullObserve
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -25,6 +25,7 @@ class AppActivity : BaseActivity() {
     lateinit var viewModelFactory: MainViewModelFactory
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
+    lateinit var toast: Toast
     private val toolbarBackButtonViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java)
     }
@@ -43,6 +44,7 @@ class AppActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_app)
+        toast = Toast.makeText(this, "", Toast.LENGTH_SHORT)
         App.appComponent.inject(this)
         if (savedInstanceState == null) {
             navigator.applyCommands(arrayOf<Command>(Replace(Screens.MainFlow)))
