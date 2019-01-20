@@ -42,6 +42,9 @@ class ForecastListAdapter(private val listener: OnForecastClickListener): ListAd
     }
 
     inner class ViewHolder(itemView: View, private val listener: OnForecastClickListener): RecyclerView.ViewHolder(itemView), View.OnClickListener{
+        init {
+            itemView.setOnClickListener(this)
+        }
         override fun onClick(v: View?) {
             listener.onForecastClick(getItem(adapterPosition))
         }

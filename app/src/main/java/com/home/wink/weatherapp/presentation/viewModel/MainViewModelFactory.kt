@@ -1,4 +1,4 @@
-package com.home.wink.weatherapp.presentation
+package com.home.wink.weatherapp.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +16,8 @@ class MainViewModelFactory @Inject constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when {
-        modelClass.isAssignableFrom(ForecastListViewModel::class.java) -> ForecastListViewModel(getAllForecastUseCase)
+        modelClass.isAssignableFrom(ToolbarBackButtonViewModel::class.java) -> ToolbarBackButtonViewModel()
+        modelClass.isAssignableFrom(ForecastListViewModel::class.java) -> ForecastListViewModel(getAllForecastUseCase, router)
         else -> throw AssertionError("Unknown model class $modelClass")
     } as T
 }

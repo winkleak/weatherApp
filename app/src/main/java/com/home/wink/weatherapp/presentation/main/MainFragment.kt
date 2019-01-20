@@ -1,25 +1,39 @@
 package com.home.wink.weatherapp.presentation.main
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.R
+
+import com.home.wink.weatherapp.presentation.base.FragmentWithToolbar
 import com.home.wink.weatherapp.presentation.forecastList.ForecastListFragment
-import kotlinx.android.synthetic.main.main_flow_layout.*
+import kotlinx.android.synthetic.main.element_toolbar.*
+import kotlinx.android.synthetic.main.fragment_main_layout.*
 
 const val MUNICH = 3220838
 const val MOSCOW = 524901
 
-class MainFlowFragment : BaseFragment() {
-    override val layoutRes: Int = R.layout.main_flow_layout
+class MainFragment : FragmentWithToolbar() {
+    override fun getOptionalToolbar(): Toolbar? = toolbar
+
+    override val layoutRes: Int = R.layout.fragment_main_layout
     private lateinit var pagerAdapter: MainViewPagerAdapter
+
     private val fragments = listOf(
             ForecastListFragment.newInstance(MUNICH),
             ForecastListFragment.newInstance(MOSCOW)
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.appComponent.inject(this)
+    }
+
     private val onTabSelectedListener = AHBottomNavigation.OnTabSelectedListener{position, _ ->
+        toolbar.title = if(position == 0) getString(R.string.munich) else getString(R.string.moscow)
         viewPager.currentItem = position
         return@OnTabSelectedListener true
     }
@@ -41,8 +55,15 @@ class MainFlowFragment : BaseFragment() {
         })
     }
 
+    override fun onBeforeAttachToolbar(toolbar: Toolbar?) {
+        super.onBeforeAttachToolbar(toolbar)
+        toolbar?.title = navigation.getItem(navigation.currentItem).getTitle(activity)
+    }
+
+
     companion object {
-        const val TAG = "MainFlowFragment"
+        const val TAG = "MainFragment"
+        fun newInstance() = MainFragment()
     }
 
 }

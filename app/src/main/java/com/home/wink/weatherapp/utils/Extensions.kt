@@ -1,4 +1,4 @@
-package com.home.wink.weatherapp.extensions
+package com.home.wink.weatherapp.utils
 
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen

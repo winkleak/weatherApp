@@ -2,15 +2,16 @@ package com.home.wink.weatherapp.presentation.forecastList
 
 import android.content.Context
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.home.wink.weatherapp.App
-import com.home.wink.weatherapp.presentation.main.BaseFragment
+import com.home.wink.weatherapp.presentation.base.FragmentWithToolbar
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.domain.entity.Forecast
-import com.home.wink.weatherapp.presentation.MainViewModelFactory
-import com.home.wink.weatherapp.presentation.forecastDetail.ForecastDetailFragment
+import com.home.wink.weatherapp.presentation.base.BaseFragment
+import com.home.wink.weatherapp.presentation.viewModel.MainViewModelFactory
 
 import kotlinx.android.synthetic.main.fragment_forecast_list.*
 import javax.inject.Inject
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClickListener {
 
     override fun onForecastClick(forecast: Forecast) {
+        viewModel.navigateToDetail(forecast)
     }
 
     companion object {
