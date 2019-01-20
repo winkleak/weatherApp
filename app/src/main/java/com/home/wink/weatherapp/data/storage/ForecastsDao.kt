@@ -4,13 +4,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import io.reactivex.Maybe
+import io.reactivex.Single
 
 @Dao
 interface ForecastsDao {
 
     @Query("SELECT * FROM forecasts WHERE cityId = :cityId")
-    fun getForecastsByCity(cityId: Int): Maybe<List<ForecastModelDb>>
+    fun getForecastsByCity(cityId: Int): Single<List<ForecastModelDb>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(forecasts: List<ForecastModelDb>)

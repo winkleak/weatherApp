@@ -1,5 +1,9 @@
 package com.home.wink.weatherapp.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Forecast(
         val city: String,
         val cityId: Int,
@@ -13,4 +17,4 @@ data class Forecast(
         val windSpeed: Double,
         val windDirection: Double,
         val iconId: Int
-)
+): Parcelable

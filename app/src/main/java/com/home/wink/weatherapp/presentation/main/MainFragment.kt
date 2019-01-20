@@ -10,22 +10,15 @@ import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.R
 
 import com.home.wink.weatherapp.presentation.base.FragmentWithToolbar
-import com.home.wink.weatherapp.presentation.forecastList.ForecastListFragment
 import kotlinx.android.synthetic.main.element_toolbar.*
 import kotlinx.android.synthetic.main.fragment_main_layout.*
-
-const val MUNCHEN = 3220838
-const val MOSCOW = 524901
 
 class MainFragment : FragmentWithToolbar() {
 
     override val layoutRes: Int = R.layout.fragment_main_layout
     override fun getOptionalToolbar(): Toolbar? = toolbar
     private lateinit var pagerAdapter: MainViewPagerAdapter
-    private val fragments = listOf(
-            ForecastListFragment.newInstance(MUNCHEN),
-            ForecastListFragment.newInstance(MOSCOW)
-    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +33,7 @@ class MainFragment : FragmentWithToolbar() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pagerAdapter = MainViewPagerAdapter(childFragmentManager, fragments)
+        pagerAdapter = MainViewPagerAdapter(childFragmentManager)
         viewPager.adapter = pagerAdapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}

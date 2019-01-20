@@ -2,6 +2,11 @@
     <string name="app_name">WeatherApp</string>
     <string name="munchen">Munchen</string>
     <string name="moscow">Moscow</string>
+
+    <string name="error_api">Service is unavailable. Please try again later.</string>
+    <string name="error_no_internet">Please check your internet connection.</string>
+    <string name="error_unknown">Unknown error occurred.</string>
+
     <string name="humidity">Humidity</string>
     <string name="pressure">Pressure</string>
     <string name="wind">Wind</string>
@@ -9,4 +14,10 @@
     <string name="wind_direction">Wind direction</string>
     <string name="cloudy">Cloudy</string>
     <string name="forecast_detail">Forecast details</string>
+    <string name="wind_speed_and_direction">%1$s %2$s m/s</string>
+    <string name="wind_speed_value">%1$s m/s</string>
+    <string name="celsius">%1$s°</string>
+    <string name="percent">%1$d%%</string>
+
+    <string name="forecast_database">forecast-database</string>
 </resources>

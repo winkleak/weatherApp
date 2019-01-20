@@ -1,9 +1,11 @@
 package com.home.wink.weatherapp.domain.repository
 
 import com.home.wink.weatherapp.data.network.ForecastApi
+import com.home.wink.weatherapp.data.storage.ForecastModelDb
 import com.home.wink.weatherapp.data.storage.ForecastsDao
 import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.utils.toForecasts
+import com.home.wink.weatherapp.utils.toForecastsDbModel
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,10 +24,7 @@ class RealForecastRepository(private val api: ForecastApi, private val forecasts
                 .filter { forecastsDb ->
                     !forecastsDb.isEmpty() && Date().time - forecastsDb.first().refreshingDate < fiveMinutesInMillis
                 }
-                .flatMap { forecastsDb ->
-                    Maybe.just(forecastsDb.toForecasts())
-                }
-                .subscribeOn(Schedulers.computation())
+                .map(List<ForecastModelDb>::toForecasts)
 
         val networkSource = api.getForecastFromCity(cityId)
                 .map { forecastNetworkModel ->
@@ -36,11 +35,11 @@ class RealForecastRepository(private val api: ForecastApi, private val forecasts
                         subscriber.onComplete()
                     }.subscribeOn(Schedulers.computation()).subscribe()
                     return@map forecastModelDb.toForecasts()
-                }.subscribeOn(Schedulers.io())
+                }
 
         return Maybe.concat(dbSource, networkSource.toMaybe())
                 .firstElement()
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
     }
 }
 

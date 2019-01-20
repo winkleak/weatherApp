@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.home.wink.weatherapp.App
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.domain.entity.Forecast
-import com.home.wink.weatherapp.domain.entity.ResponseError
 import com.home.wink.weatherapp.presentation.base.BaseFragment
-import com.home.wink.weatherapp.presentation.viewModel.MainViewModelFactory
+import com.home.wink.weatherapp.presentation.aac.MainViewModelFactory
 
 import kotlinx.android.synthetic.main.fragment_forecast_list.*
 import javax.inject.Inject
@@ -19,7 +18,7 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
     override val layoutRes: Int = R.layout.fragment_forecast_list
 
     override fun onForecastClick(forecast: Forecast) {
-        viewModel.navigateToDetail(forecast)
+        viewModel.onForecastClick(forecast)
     }
 
     @Inject
@@ -35,7 +34,10 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
             adapter.submitList(it)
             swiperefresh.isRefreshing = false
         })
-        viewModel.errorLiveData.observe(this, Observer<ResponseError> { showError(it) })
+        viewModel.errorLiveData.observe(this, Observer {
+            showError(getString(it))
+            swiperefresh.isRefreshing = false
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

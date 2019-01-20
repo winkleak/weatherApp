@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.home.wink.weatherapp.R
 import com.home.wink.weatherapp.domain.entity.Forecast
-import com.home.wink.weatherapp.domain.entity.directionByDegree
+import com.home.wink.weatherapp.domain.entity.WindDirection.Companion.directionByDegree
+import com.home.wink.weatherapp.utils.ONE_AFTER_DOT_FORMAT
+import com.home.wink.weatherapp.utils.TITLE_DATE_FORMAT
 import kotlinx.android.synthetic.main.item_forecast.view.*
-import java.text.DecimalFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
 class ForecastListAdapter(private val listener: OnForecastClickListener) : ListAdapter<Forecast, ForecastListAdapter.ViewHolder>(diffCallback) {
@@ -37,11 +37,15 @@ class ForecastListAdapter(private val listener: OnForecastClickListener) : ListA
 
         fun bindData(item: Forecast) {
             itemView.apply {
-                temperatureTv.text = "${temperatureFormat.format(item.temperature.dec())}°"
+                val temp = ONE_AFTER_DOT_FORMAT.format(item.temperature.dec())
+                temperatureTv.text = itemView.context.getString(R.string.celsius, temp)
                 humidityTv.text = item.humidity.toString()
                 pressureTv.text = item.pressure.toString()
-                windTv.text = "${directionByDegree(item.windDirection)} ${item.windSpeed} m/s"
-                dateTv.text = titleDateFormat.format(Date(item.date))
+                windTv.text = itemView.context.getString(
+                        R.string.wind_speed_and_direction,
+                        directionByDegree(item.windDirection).toString(),
+                        ONE_AFTER_DOT_FORMAT.format(item.windSpeed))
+                dateTv.text = TITLE_DATE_FORMAT.format(Date(item.date))
                 weatherIcon.setImageResource(item.iconId)
                 weatherDescTv.text = item.weather
             }
@@ -58,9 +62,6 @@ class ForecastListAdapter(private val listener: OnForecastClickListener) : ListA
             override fun areContentsTheSame(oldItem: Forecast, newItem: Forecast) =
                     oldItem == newItem
         }
-
-        val titleDateFormat = SimpleDateFormat("d MMM hh:mm aaa")
-        private val temperatureFormat = DecimalFormat("#.#")
 
     }
 

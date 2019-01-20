@@ -1,4 +1,4 @@
-package com.home.wink.weatherapp.presentation.viewModel
+package com.home.wink.weatherapp.presentation.aac
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

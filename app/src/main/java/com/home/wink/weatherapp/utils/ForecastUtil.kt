@@ -1,9 +1,15 @@
 package com.home.wink.weatherapp.utils
 
 import com.home.wink.weatherapp.R
+import com.home.wink.weatherapp.data.network.response.ForecastNetworkModel
 import com.home.wink.weatherapp.data.storage.ForecastModelDb
 import com.home.wink.weatherapp.domain.entity.Forecast
+import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
+val TITLE_DATE_FORMAT = SimpleDateFormat("d MMM hh:mm aaa")
+val ONE_AFTER_DOT_FORMAT = DecimalFormat("#.#")
 fun List<ForecastModelDb>.toForecasts(): List<Forecast> {
     val forecasts: MutableList<Forecast> = mutableListOf()
 
@@ -18,10 +24,34 @@ fun List<ForecastModelDb>.toForecasts(): List<Forecast> {
                         pressure = forecastDb.pressure,
                         clouds = forecastDb.clouds,
                         snow = forecastDb.city,
-                        weather = forecastDb.city,
+                        weather = forecastDb.weather,
                         windSpeed = forecastDb.windSpeed,
                         windDirection = forecastDb.windDirection,
                         iconId = forecastDb.iconId
+                ))
+    }
+    return forecasts
+}
+
+fun ForecastNetworkModel.toForecastsDbModel(): List<ForecastModelDb> {
+    val forecasts: MutableList<ForecastModelDb> = mutableListOf()
+    val refreshingDate = Calendar.getInstance().time.time
+    list.forEach { responseForecast ->
+        forecasts.add(
+                ForecastModelDb(
+                        city = city.name,
+                        cityId = city.id,
+                        date = timeInMillisFromSeconds(responseForecast.dt),
+                        temperature = kelvinToCelsius(responseForecast.main.temp),
+                        humidity = responseForecast.main.humidity,
+                        pressure = responseForecast.main.pressure,
+                        clouds = responseForecast.clouds.all,
+                        snow = if (responseForecast.snow == null) null else "",
+                        weather = responseForecast.weather.first().description,
+                        windSpeed = responseForecast.wind.speed,
+                        windDirection = responseForecast.wind.deg,
+                        iconId = imageIdFromWeather(responseForecast.weather.first().icon),
+                        refreshingDate = refreshingDate
                 ))
     }
     return forecasts

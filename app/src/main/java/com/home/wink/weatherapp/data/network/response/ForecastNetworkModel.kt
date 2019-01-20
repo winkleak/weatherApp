@@ -1,11 +1,5 @@
 package com.home.wink.weatherapp.data.network.response
 
-import com.home.wink.weatherapp.data.storage.ForecastModelDb
-import com.home.wink.weatherapp.utils.imageIdFromWeather
-import com.home.wink.weatherapp.utils.kelvinToCelsius
-import com.home.wink.weatherapp.utils.timeInMillisFromSeconds
-import java.util.*
-
 data class ForecastNetworkModel(
         val city: City,
         val cnt: Int,
@@ -66,31 +60,6 @@ data class ForecastNetworkModel(
                 val speed: Double
         )
 
-        class Snow
+        object Snow
     }
-
-    fun toForecastsDbModel(): List<ForecastModelDb> {
-        val forecasts: MutableList<ForecastModelDb> = mutableListOf()
-        val refreshingDate = Calendar.getInstance().time.time
-        list.forEach { responseForecast ->
-            forecasts.add(
-                    ForecastModelDb(
-                            city = city.name,
-                            cityId = city.id,
-                            date = timeInMillisFromSeconds(responseForecast.dt),
-                            temperature = kelvinToCelsius(responseForecast.main.temp),
-                            humidity = responseForecast.main.humidity,
-                            pressure = responseForecast.main.pressure,
-                            clouds = responseForecast.clouds.all,
-                            snow = if (responseForecast.snow == null) null else "",
-                            weather = responseForecast.weather.first().description,
-                            windSpeed = responseForecast.wind.speed,
-                            windDirection = responseForecast.wind.deg,
-                            iconId = imageIdFromWeather(responseForecast.weather.first().icon),
-                            refreshingDate = refreshingDate
-                    ))
-        }
-        return forecasts
-    }
-
 }
