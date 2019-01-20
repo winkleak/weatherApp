@@ -14,7 +14,40 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ForecastListAdapter(private val listener: OnForecastClickListener): ListAdapter<Forecast, ForecastListAdapter.ViewHolder>(diffCallback) {
+class ForecastListAdapter(private val listener: OnForecastClickListener) : ListAdapter<Forecast, ForecastListAdapter.ViewHolder>(diffCallback) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastListAdapter.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.item_forecast, parent, false)
+        return ViewHolder(view, listener)
+    }
+
+    override fun onBindViewHolder(holder: ForecastListAdapter.ViewHolder, position: Int) {
+        holder.bindData(getItem(position))
+    }
+
+    inner class ViewHolder(itemView: View, private val listener: OnForecastClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            listener.onForecastClick(getItem(adapterPosition))
+        }
+
+        fun bindData(item: Forecast) {
+            itemView.apply {
+                temperatureTv.text = "${temperatureFormat.format(item.temperature.dec())}°"
+                humidityTv.text = item.humidity.toString()
+                pressureTv.text = item.pressure.toString()
+                windTv.text = "${directionByDegree(item.windDirection)} ${item.windSpeed} m/s"
+                dateTv.text = titleDateFormat.format(Date(item.date))
+                weatherIcon.setImageResource(item.iconId)
+                weatherDescTv.text = item.weather
+            }
+        }
+
+    }
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<Forecast>() {
@@ -31,37 +64,7 @@ class ForecastListAdapter(private val listener: OnForecastClickListener): ListAd
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastListAdapter.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_forecast, parent, false)
-        return ViewHolder(view, listener)
-    }
-
-    override fun onBindViewHolder(holder: ForecastListAdapter.ViewHolder, position: Int) {
-        holder.bindData(getItem(position))
-    }
-
-    inner class ViewHolder(itemView: View, private val listener: OnForecastClickListener): RecyclerView.ViewHolder(itemView), View.OnClickListener{
-        init {
-            itemView.setOnClickListener(this)
-        }
-        override fun onClick(v: View?) {
-            listener.onForecastClick(getItem(adapterPosition))
-        }
-        fun bindData(item: Forecast) {
-            itemView.apply {
-                temperatureTv.text = "${temperatureFormat.format(item.temperature.dec())}°"
-                humidityTv.text = item.humidity.toString()
-                pressureTv.text = item.pressure.toString()
-                windTv.text = "${directionByDegree(item.windDirection)} ${item.windSpeed} m/s"
-                dateTv.text = titleDateFormat.format(Date(item.date))
-                weatherIcon.setImageResource(item.iconId)
-                weatherDescTv.text = item.weather
-            }
-        }
-
-    }
-    interface OnForecastClickListener{
+    interface OnForecastClickListener {
         fun onForecastClick(forecast: Forecast)
     }
 }

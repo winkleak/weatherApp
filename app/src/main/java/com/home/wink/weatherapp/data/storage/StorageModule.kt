@@ -11,7 +11,7 @@ class StorageModule {
     @Provides
     @Singleton
     fun providesStorage(context: Context) =
-        Room.databaseBuilder(context, AppDatabase::class.java, "translations-database").build()
+            Room.databaseBuilder(context, AppDatabase::class.java, "translations-database").build()
 
     @Provides
     @Singleton

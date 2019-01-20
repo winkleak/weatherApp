@@ -12,5 +12,5 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideForecastRepository(api: ForecastApi, forecastsDao: ForecastsDao): ForecastRepository =
-        RealForecastRepository(api, forecastsDao)
+            RealForecastRepository(api, forecastsDao)
 }

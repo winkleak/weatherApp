@@ -21,6 +21,7 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
     override fun onForecastClick(forecast: Forecast) {
         viewModel.navigateToDetail(forecast)
     }
+
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
     private val adapter = ForecastListAdapter(this)
@@ -44,7 +45,7 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
         swiperefresh.setOnRefreshListener {
             arguments?.let { loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
         }
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             arguments?.let { loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
         }
     }

@@ -17,15 +17,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class ForecastDetailFragment: FragmentWithToolbar(){
-
-    override fun getOptionalToolbar(): Toolbar? = toolbar
+class ForecastDetailFragment : FragmentWithToolbar() {
 
     override val layoutRes: Int = R.layout.fragment_forecast_detail
+    override fun getOptionalToolbar(): Toolbar? = toolbar
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
-
     private val toolbarBackButtonViewModel by lazy {
         activity?.run { ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java) }
                 ?: throw IllegalArgumentException("Activity is needed to create ToolbarBackButtonViewModel")
@@ -39,7 +37,8 @@ class ForecastDetailFragment: FragmentWithToolbar(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        arguments?.let { val forecast = it.getParcelable<ForecastDto>(FORECAST_PARCELABLE_EXTRAS)
+        arguments?.let {
+            val forecast = it.getParcelable<ForecastDto>(FORECAST_PARCELABLE_EXTRAS)
             temperatureTv.text = "${temperatureFormat.format(forecast.temperature.dec())}°"
             humidityTv.text = "${forecast.humidity}%"
             pressureTv.text = forecast.pressure.toString()

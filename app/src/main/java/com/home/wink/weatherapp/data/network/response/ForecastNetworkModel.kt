@@ -4,7 +4,6 @@ import com.home.wink.weatherapp.data.storage.ForecastModelDb
 import com.home.wink.weatherapp.utils.imageIdFromWeather
 import com.home.wink.weatherapp.utils.kelvinToCelsius
 import com.home.wink.weatherapp.utils.timeInMillisFromSeconds
-import com.home.wink.weatherapp.domain.entity.Forecast
 import java.util.*
 
 data class ForecastNetworkModel(

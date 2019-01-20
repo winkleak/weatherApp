@@ -10,9 +10,9 @@ import javax.inject.Singleton
 
 @Singleton
 class MainViewModelFactory @Inject constructor(
-    private val getAllForecastUseCase: GetAllForecastUseCase,
-    private val router: Router
-) : ViewModelProvider.Factory{
+        private val getAllForecastUseCase: GetAllForecastUseCase,
+        private val router: Router
+) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when {

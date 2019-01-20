@@ -5,15 +5,16 @@ import com.home.wink.weatherapp.di.AppComponent
 import com.home.wink.weatherapp.di.AppModule
 import com.home.wink.weatherapp.di.DaggerAppComponent
 
-class App: Application() {
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
+class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
+    }
+
+    companion object {
+        lateinit var appComponent: AppComponent
     }
 }

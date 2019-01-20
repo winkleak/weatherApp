@@ -23,17 +23,11 @@ class AppActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
-
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
-
     private val toolbarBackButtonViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java)
     }
-
-    private val currentFragmentWithToolbar: BaseFragment?
-        get() = supportFragmentManager.findFragmentById(R.id.container) as? BaseFragment
-
     private val navigator: Navigator =
             object : SupportAppNavigator(this, supportFragmentManager, R.id.container) {
                 override fun setupFragmentTransaction(

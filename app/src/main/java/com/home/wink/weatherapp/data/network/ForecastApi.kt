@@ -3,7 +3,8 @@ package com.home.wink.weatherapp.data.network
 
 import com.home.wink.weatherapp.data.network.response.ForecastNetworkModel
 import io.reactivex.Single
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val FORECAST = "forecast"
 

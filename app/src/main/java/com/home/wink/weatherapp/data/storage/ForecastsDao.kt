@@ -1,6 +1,9 @@
 package com.home.wink.weatherapp.data.storage
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import io.reactivex.Maybe
 
 @Dao
@@ -12,6 +15,6 @@ interface ForecastsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(forecasts: List<ForecastModelDb>)
 
-    @Query( "DELETE FROM forecasts WHERE cityId = :cityId")
+    @Query("DELETE FROM forecasts WHERE cityId = :cityId")
     fun deleteAllWithCityId(cityId: Int)
 }

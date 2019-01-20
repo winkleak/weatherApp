@@ -18,11 +18,10 @@ const val MUNCHEN = 3220838
 const val MOSCOW = 524901
 
 class MainFragment : FragmentWithToolbar() {
-    override fun getOptionalToolbar(): Toolbar? = toolbar
 
     override val layoutRes: Int = R.layout.fragment_main_layout
+    override fun getOptionalToolbar(): Toolbar? = toolbar
     private lateinit var pagerAdapter: MainViewPagerAdapter
-
     private val fragments = listOf(
             ForecastListFragment.newInstance(MUNCHEN),
             ForecastListFragment.newInstance(MOSCOW)
@@ -33,8 +32,8 @@ class MainFragment : FragmentWithToolbar() {
         App.appComponent.inject(this)
     }
 
-    private val onTabSelectedListener = AHBottomNavigation.OnTabSelectedListener{position, _ ->
-        toolbar.title = if(position == 0) getString(R.string.munchen) else getString(R.string.moscow)
+    private val onTabSelectedListener = AHBottomNavigation.OnTabSelectedListener { position, _ ->
+        toolbar.title = if (position == 0) getString(R.string.munchen) else getString(R.string.moscow)
         viewPager.currentItem = position
         return@OnTabSelectedListener true
     }
@@ -43,7 +42,7 @@ class MainFragment : FragmentWithToolbar() {
         super.onViewCreated(view, savedInstanceState)
         pagerAdapter = MainViewPagerAdapter(childFragmentManager, fragments)
         viewPager.adapter = pagerAdapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {

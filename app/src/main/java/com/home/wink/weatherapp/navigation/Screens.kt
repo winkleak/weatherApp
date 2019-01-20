@@ -9,6 +9,7 @@ object Screens {
     object MainFlow : SupportAppScreen() {
         override fun getFragment() = MainFragment.newInstance()
     }
+
     data class ForecastDetail(
             val forecastDto: ForecastDto,
             val cityName: String

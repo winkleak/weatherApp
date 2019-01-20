@@ -27,8 +27,8 @@ fun List<ForecastModelDb>.toForecasts(): List<Forecast> {
     return forecasts
 }
 
-fun imageIdFromWeather(weatherId: String): Int{
-    return when(weatherId){
+fun imageIdFromWeather(weatherId: String): Int {
+    return when (weatherId) {
         "01d" -> R.drawable.clear_sky
         "01n" -> R.drawable.clear_sky_night
         "02d" -> R.drawable.few_cloudy
@@ -53,6 +53,6 @@ fun imageIdFromWeather(weatherId: String): Int{
 
 fun timeInMillisFromSeconds(seconds: Int) = seconds * 1000L
 
-fun kelvinToCelsius(kelvin: Double): Double{
-    return kelvin -273.15
+fun kelvinToCelsius(kelvin: Double): Double {
+    return kelvin - 273.15
 }

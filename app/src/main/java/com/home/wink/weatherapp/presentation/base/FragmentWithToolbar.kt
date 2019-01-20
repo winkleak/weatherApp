@@ -37,4 +37,4 @@ abstract class FragmentWithToolbar : BaseFragment() {
     protected open fun onToolbarAttached(toolbar: Toolbar?) {}
 
 
-    }
+}
