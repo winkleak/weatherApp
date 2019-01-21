@@ -6,6 +6,8 @@ import com.home.wink.weatherapp.domain.entity.Forecast
 import com.home.wink.weatherapp.domain.usecase.GetForecastUseCase
 import com.home.wink.weatherapp.navigation.Screens
 import com.home.wink.weatherapp.presentation.aac.SingleLiveEvent
+import com.home.wink.weatherapp.utils.addTo
+import com.home.wink.weatherapp.utils.deleteFrom
 import com.home.wink.weatherapp.utils.getCommonErrorDescription
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -22,17 +24,18 @@ class ForecastListViewModel(private val getForecastUseCase: GetForecastUseCase, 
     }
 
     private val disposable = CompositeDisposable()
-    private var getForecastObservable: Disposable? = null
+    private var getForecastDisposable: Disposable? = null
 
     fun loadForecastForCity(cityId: Int) {
-        getForecastObservable = getForecastUseCase.getForecastForCity(cityId).subscribe(
-                { forecasts ->
-                    forecastLoadedLiveData.postValue(forecasts)
-                },
-                {
-                    errorLiveData.postValue(getCommonErrorDescription(it))
-                })
-        disposable.addAll(getForecastObservable)
+        getForecastDisposable.deleteFrom(disposable)
+        getForecastDisposable = getForecastUseCase.getForecastForCity(cityId).subscribe(
+            { forecasts ->
+                forecastLoadedLiveData.postValue(forecasts)
+            },
+            {
+                errorLiveData.postValue(getCommonErrorDescription(it))
+            })
+        getForecastDisposable.addTo(disposable)
     }
 
     fun onForecastClick(forecast: Forecast) {
