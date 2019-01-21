@@ -25,39 +25,44 @@ android {
 androidExtensions {
     experimental = true
 }
+ext {
+    retrofit = '2.5.0'
+    room = '2.1.0-alpha03'
+    dagger = '2.17'
+}
 
 dependencies {
+    //android && ui
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.aurelhubert:ahbottomnavigation:2.3.4'
-
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    //room
+    implementation "androidx.room:room-runtime:$room"
+    implementation "androidx.room:room-rxjava2:$room"
+    kapt "androidx.room:room-compiler:$room"
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-
-    implementation "androidx.room:room-runtime:2.1.0-alpha03"
-    implementation "androidx.room:room-rxjava2:2.1.0-alpha03"
-    kapt "androidx.room:room-compiler:2.1.0-alpha03"
-
-    implementation 'com.google.dagger:dagger:2.17'
-    kapt 'com.google.dagger:dagger-compiler:2.17'
-
+    //dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    //rxjava
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
-
+    //other
     implementation "ru.terrakok.cicerone:cicerone:4.0.2"
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     testImplementation "org.mockito:mockito-core:2.23.4"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
-
 }
 repositories {
     mavenCentral()
