@@ -10,7 +10,3 @@ import io.reactivex.disposables.Disposable
 fun Disposable?.addTo(compositeDisposable: CompositeDisposable) {
     this?.let { compositeDisposable.add(it) }
 }
-
-fun Disposable?.deleteFrom(compositeDisposable: CompositeDisposable) {
-    this?.let { compositeDisposable.delete(it) }
-}
