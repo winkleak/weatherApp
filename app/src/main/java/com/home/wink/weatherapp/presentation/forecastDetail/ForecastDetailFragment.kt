@@ -26,7 +26,8 @@ class ForecastDetailFragment : FragmentWithToolbar() {
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
     private val toolbarBackButtonViewModel by lazy {
-         ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java)
+        activity?.run { ViewModelProviders.of(this, viewModelFactory).get(ToolbarBackButtonViewModel::class.java) }
+            ?: throw IllegalArgumentException("Activity is needed to create ToolbarBackButtonViewModel")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

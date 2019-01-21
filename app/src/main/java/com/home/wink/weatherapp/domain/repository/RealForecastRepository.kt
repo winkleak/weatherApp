@@ -8,7 +8,6 @@ import com.home.wink.weatherapp.utils.toForecasts
 import com.home.wink.weatherapp.utils.toForecastsDbModel
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 

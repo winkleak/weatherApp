@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "forecasts")
-class ForecastModelDb(
+data class ForecastModelDb(
         @PrimaryKey(autoGenerate = true)
         val id: Long? = null,
         val date: Long,
