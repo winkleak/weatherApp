@@ -14,14 +14,8 @@ import ru.terrakok.cicerone.Router
 
 class ForecastListViewModel(private val getForecastUseCase: GetForecastUseCase, private val router: Router) : ViewModel() {
 
-    val forecastLoadedLiveData: MutableLiveData<List<Forecast>> by lazy {
-        MutableLiveData<List<Forecast>>()
-    }
-
-    val errorLiveData: SingleLiveEvent<Int> by lazy {
-        SingleLiveEvent<Int>()
-    }
-
+    val forecastLoadedLiveData: MutableLiveData<List<Forecast>> = MutableLiveData()
+    val errorLiveData: SingleLiveEvent<Int> = SingleLiveEvent()
     private val disposable = CompositeDisposable()
     private var getForecastDisposable: Disposable? = null
 
