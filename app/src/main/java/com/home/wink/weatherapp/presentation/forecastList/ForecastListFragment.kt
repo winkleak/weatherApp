@@ -1,6 +1,7 @@
 package com.home.wink.weatherapp.presentation.forecastList
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,8 +41,8 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
         })
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = adapter
         swiperefresh.setOnRefreshListener {
@@ -51,7 +52,7 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
             arguments?.let { loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
         }
     }
-
+    
     private fun loadForecastForCity(cityId: Int) {
         viewModel.loadForecastForCity(cityId)
         swiperefresh.isRefreshing = true

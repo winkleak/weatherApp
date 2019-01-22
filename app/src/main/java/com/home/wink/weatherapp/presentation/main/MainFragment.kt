@@ -33,6 +33,18 @@ class MainFragment : FragmentWithToolbar() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initNavigationView()
+        initPager()
+    }
+
+    private fun initNavigationView() {
+        navigation.addItem(AHBottomNavigationItem(getString(R.string.munchen), R.drawable.ic_home_black_24dp))
+        navigation.addItem(AHBottomNavigationItem(getString(R.string.moscow), R.drawable.ic_home_black_24dp))
+        navigation.setOnTabSelectedListener(onTabSelectedListener)
+        navigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
+    }
+
+    fun initPager(){
         pagerAdapter = MainViewPagerAdapter(childFragmentManager)
         viewPager.adapter = pagerAdapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -42,14 +54,6 @@ class MainFragment : FragmentWithToolbar() {
                 navigation.currentItem = position
             }
         })
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        navigation.addItem(AHBottomNavigationItem(getString(R.string.munchen), R.drawable.ic_home_black_24dp))
-        navigation.addItem(AHBottomNavigationItem(getString(R.string.moscow), R.drawable.ic_home_black_24dp))
-        navigation.setOnTabSelectedListener(onTabSelectedListener)
-        navigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
     }
 
     override fun onBeforeAttachToolbar(toolbar: Toolbar?) {

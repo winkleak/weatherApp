@@ -2,6 +2,7 @@ package com.home.wink.weatherapp.presentation.forecastDetail
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.home.wink.weatherapp.App
@@ -35,9 +36,8 @@ class ForecastDetailFragment : FragmentWithToolbar() {
         App.appComponent.inject(this)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             val forecast = it.getParcelable<Forecast>(FORECAST_PARCELABLE_EXTRAS)
             if(forecast != null){
