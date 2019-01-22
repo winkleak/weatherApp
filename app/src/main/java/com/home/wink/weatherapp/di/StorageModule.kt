@@ -1,8 +1,9 @@
-package com.home.wink.weatherapp.data.storage
+package com.home.wink.weatherapp.di
 
 import android.content.Context
 import androidx.room.Room
 import com.home.wink.weatherapp.R
+import com.home.wink.weatherapp.data.storage.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

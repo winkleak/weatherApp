@@ -1,4 +1,4 @@
-package com.home.wink.weatherapp.navigation
+package com.home.wink.weatherapp.di
 
 import dagger.Module
 import dagger.Provides

@@ -1,8 +1,9 @@
-package com.home.wink.weatherapp.data.network
+package com.home.wink.weatherapp.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.home.wink.weatherapp.BuildConfig
+import com.home.wink.weatherapp.data.network.ForecastApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

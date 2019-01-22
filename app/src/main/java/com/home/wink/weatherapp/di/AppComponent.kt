@@ -1,10 +1,5 @@
 package com.home.wink.weatherapp.di
 
-import com.home.wink.weatherapp.data.network.NetworkModule
-import com.home.wink.weatherapp.data.storage.StorageModule
-import com.home.wink.weatherapp.domain.repository.RepositoryModule
-import com.home.wink.weatherapp.domain.usecase.UseCaseModule
-import com.home.wink.weatherapp.navigation.NavigationModule
 import com.home.wink.weatherapp.presentation.forecastDetail.ForecastDetailFragment
 import com.home.wink.weatherapp.presentation.forecastList.ForecastListFragment
 import com.home.wink.weatherapp.presentation.main.AppActivity
