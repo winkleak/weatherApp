@@ -52,7 +52,7 @@ class ForecastListFragment : BaseFragment(), ForecastListAdapter.OnForecastClick
             arguments?.let { loadForecastForCity(it.getInt(CITY_ID_EXTRA)) }
         }
     }
-    
+
     private fun loadForecastForCity(cityId: Int) {
         viewModel.loadForecastForCity(cityId)
         swiperefresh.isRefreshing = true
