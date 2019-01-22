@@ -4,7 +4,7 @@ import com.home.wink.weatherapp.data.network.ForecastApi
 import com.home.wink.weatherapp.data.network.response.ForecastNetworkModel
 import com.home.wink.weatherapp.data.storage.ForecastModelDb
 import com.home.wink.weatherapp.data.storage.ForecastsDao
-import com.home.wink.weatherapp.domain.repository.RealForecastRepository
+import com.home.wink.weatherapp.data.repository.RealForecastRepository
 import com.home.wink.weatherapp.utils.toForecasts
 import com.home.wink.weatherapp.utils.toForecastsDbModel
 import com.nhaarman.mockitokotlin2.doReturn
@@ -18,10 +18,10 @@ import java.util.*
 
 class ForecastRepositoryUnitTest {
     private lateinit var forecastsDao: ForecastsDao
+    private lateinit var api: ForecastApi
     private var currentTime: Long = Date().time
     private var fiveMinutes: Long = 5 * 60 * 60 * 1000L
     private val timeStep: Long = 10000L
-    private lateinit var api: ForecastApi
     private val ID_WITH_ACTUAL_DATA_IN_DB = 0
     private val ID_WITH_OLD_DATA_IN_DB = 1
     private val ID_WITHOUT_DATA_IN_DB = 2
