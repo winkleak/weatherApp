@@ -2,7 +2,7 @@ package com.home.wink.weatherapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.home.wink.weatherapp.R
+import com.home.wink.weatherapp.BuildConfig
 import com.home.wink.weatherapp.data.storage.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -13,7 +13,7 @@ class StorageModule {
     @Provides
     @Singleton
     fun providesStorage(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, context.getString(R.string.forecast_database)).build()
+            Room.databaseBuilder(context, AppDatabase::class.java, BuildConfig.FORECAST_DB_NAME).build()
 
     @Provides
     @Singleton

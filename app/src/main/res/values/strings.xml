@@ -19,5 +19,4 @@
     <string name="celsius">%1$s°</string>
     <string name="percent">%1$d%%</string>
 
-    <string name="forecast_database">forecast-database</string>
 </resources>
