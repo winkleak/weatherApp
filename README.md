@@ -1,1 +1,1 @@
-# weatherApp test task for kupibilet
+# used: ViewModel, LiveData, Room, Retrofit, RxJava2, Dagger2
